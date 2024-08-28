@@ -1,4 +1,4 @@
-# WNBA Finals Predictor
+# WNBA Game Predictor
 
 This program uses logistic regression to predict the winner of WNBA games based on data from the 2023 WNBA regular season. This model is built using Python, pandas, and sci-kit learn.
 
