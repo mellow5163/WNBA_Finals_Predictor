@@ -1,4 +1,5 @@
-# WNBA Prediction Model
+# WNBA Finals Predictor
+
 
 import pandas as pd
 
@@ -36,8 +37,8 @@ for index, row in df.iterrows():
 remove_cols = ["Home/Neutral", "Visitor/Neutral", "Home_Winner", "PTS", "PTS.1"]
 
 
-
 selected_cols = [x for x in df.columns if x not in remove_cols]
+
 
 df[selected_cols].head()
 
@@ -65,7 +66,6 @@ rr = RidgeClassifier(alpha=1.0)
 
 
 sfs = SequentialFeatureSelector(rr, n_features_to_select=10, direction='backward')
-
 
 
 sfs.fit(df[selected_cols], df['Home_Winner'])
@@ -126,9 +126,11 @@ non_aces_liberty_game[(non_aces_liberty_game['Home/Neutral'] == 'Las Vegas Aces'
 final_matchup = df[(df['Home/Neutral'] == 'Las Vegas Aces') & (df['Visitor/Neutral'] == 'New York Liberty')][:1]
 final_matchup[predictors]
 
+
 # Predict the winner of the final matchup
 model = LogisticRegression()
 model.fit(non_aces_liberty_game[predictors], non_aces_liberty_game['Home_Winner'])
+
 
 # Predict the outcome of the final_matchup. Prediction of 1.0 means the home team will win, and 0.0 means the away team will win
 y_pred = model.predict(final_matchup[predictors])
